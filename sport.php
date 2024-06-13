@@ -10,8 +10,9 @@ $news = fetch_news('sport');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RP Online</title>
+    <title>The Garlic</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -36,28 +37,38 @@ $news = fetch_news('sport');
                 </ul>
             </nav>
         </header>
+        <?php if (isset($_SESSION['login_success'])): ?>
+            <div class="success-message">
+                <?php 
+                echo htmlspecialchars($_SESSION['login_success']); 
+                unset($_SESSION['login_success']);
+                ?>
+            </div>
+        <?php endif; ?>
+        <?php if (isset($_GET['delete_success'])): ?>
+            <div class="success-message">
+                News item deleted successfully.
+            </div>
+        <?php endif; ?>
         <main>
-            <?php if (isset($_SESSION['login_success'])): ?>
-                <div class="success-message">
-                    <?php 
-                    echo htmlspecialchars($_SESSION['login_success']); 
-                    unset($_SESSION['login_success']);
-                    ?>
-                </div>
-            <?php endif; ?>
-            <h2 id="news-header">Sport News</h2>
-            <section id="news">
-                <?php foreach ($news as $article): ?>
-                    <article class="news-item">
-                        <img src="images/<?php echo htmlspecialchars($article['image']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>" class="news-image">
-                        <div class="news-content">
-                            <h3><?php echo htmlspecialchars($article['title']); ?></h3>
-                            <p><?php echo htmlspecialchars($article['summary']); ?></p>
-                            <a href="article.php?id=<?php echo htmlspecialchars($article['id']); ?>">Read More</a>
+            <div id="news-container">
+                <h2 id="news-header">Latest News</h2>
+                <section id="news">
+                    <?php foreach ($news as $news_item): ?>
+                        <div class="news-item">
+                            <img src="images/<?php echo htmlspecialchars($news_item['image']); ?>" alt="<?php echo htmlspecialchars($news_item['title']); ?>" class="news-image">
+                            <div class="news-content">
+                                <h3><?php echo htmlspecialchars($news_item['title']); ?></h3>
+                                <p><?php echo htmlspecialchars($news_item['summary']); ?></p>
+                                <a href="news.php?id=<?php echo $news_item['id']; ?>">Read More</a>
+                                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                    <a href="php/delete_news.php?id=<?php echo $news_item['id']; ?>" class="delete-link">Delete</a>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                    </article>
-                <?php endforeach; ?>
-            </section>
+                    <?php endforeach; ?>
+                </section>
+            </div>
         </main>
         <footer>
             <p>Mauro Omeragić | JMBAG: 0246111562 | Tehničko veleučilište u Zagrebu | Programiranje web aplikacija</p>

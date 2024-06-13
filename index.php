@@ -10,8 +10,9 @@ $news = fetch_news();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RP Online</title>
+    <title>The Garlic</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -44,6 +45,11 @@ $news = fetch_news();
                 ?>
             </div>
         <?php endif; ?>
+        <?php if (isset($_GET['delete_success'])): ?>
+            <div class="success-message">
+                News item deleted successfully.
+            </div>
+        <?php endif; ?>
         <main>
             <div id="news-container">
                 <h2 id="news-header">Latest News</h2>
@@ -54,7 +60,10 @@ $news = fetch_news();
                             <div class="news-content">
                                 <h3><?php echo htmlspecialchars($news_item['title']); ?></h3>
                                 <p><?php echo htmlspecialchars($news_item['summary']); ?></p>
-                                <a href="article.php?id=<?php echo $news_item['id']; ?>">Read More</a>
+                                <a href="news.php?id=<?php echo $news_item['id']; ?>">Read More</a>
+                                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                    <a href="php/delete_news.php?id=<?php echo $news_item['id']; ?>" class="delete-link">Delete</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>

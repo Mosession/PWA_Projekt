@@ -334,3 +334,13 @@ body.auth-body {
     margin-top: 5px;
     display: block;
 }
+
+.delete-link {
+    color: red;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.delete-link:hover {
+    text-decoration: underline;
+}
