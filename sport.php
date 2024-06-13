@@ -52,7 +52,7 @@ $news = fetch_news('sport');
         <?php endif; ?>
         <main>
             <div id="news-container">
-                <h2 id="news-header">Latest News</h2>
+                <h2 id="news-header">Sport News</h2>
                 <section id="news">
                     <?php foreach ($news as $news_item): ?>
                         <div class="news-item">

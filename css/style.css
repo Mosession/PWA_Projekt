@@ -195,6 +195,13 @@ button:hover {
     text-decoration: underline;
 }
 
+.news-content h3,
+.news-content p {
+    white-space: normal; 
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
 .success-message {
     background-color: #dff0d8;
     color: #3c763d;
@@ -343,4 +350,106 @@ body.auth-body {
 
 .delete-link:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .news-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .news-image {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .welcome-text {
+        position: static;
+        text-align: center;
+        transform: none;
+        margin-top: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .wrapper {
+        width: 90%;
+        padding: 0 20px;
+    }
+
+    .news-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .news-image {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .welcome-text {
+        position: static;
+        text-align: center;
+        transform: none;
+        margin-top: 10px;
+    }
+
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 5px 10px;
+    }
+}
+
+@media (min-width: 901px) {
+    .wrapper {
+        width: 75%;
+    }
+
+    .news-item {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .news-image {
+        width: 150px;
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    .welcome-text {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        text-align: right;
+    }
+
+    nav ul {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 0 10px;
+    }
 }
