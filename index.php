@@ -61,7 +61,7 @@ $news = fetch_news();
                             <div class="news-content">
                                 <h3><?php echo htmlspecialchars($news_item['title']); ?></h3>
                                 <p><?php echo htmlspecialchars($news_item['summary']); ?></p>
-                                <a href="news.php?id=<?php echo $news_item['id']; ?>">Read More</a>
+                                <a href="article.php?id=<?php echo $news_item['id']; ?>">Read More</a>
                             </div>
                         </div>
                     <?php endforeach; ?>

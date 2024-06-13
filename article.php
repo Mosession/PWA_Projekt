@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
 </head>
 <body>
     <div class="wrapper">
-        <header>
+    <header>
             <h1>The Garlic</h1>
             <?php if (isset($_SESSION['username'])): ?>
                 <div class="welcome-text">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</div>
@@ -37,6 +37,7 @@ if (isset($_GET['id'])) {
                     <?php if (isset($_SESSION['username'])): ?>
                         <?php if ($_SESSION['role'] === 'admin'): ?>
                             <li><a id="enterNewsLink" href="enter_news.php">Enter News</a></li>
+                            <li><a id="deleteNewsLink" href="delete_news.php">Delete News</a></li>
                         <?php endif; ?>
                         <li><a id="logoutLink" href="logout.php">Logout</a></li>
                     <?php else: ?>
