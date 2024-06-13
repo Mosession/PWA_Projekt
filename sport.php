@@ -29,6 +29,7 @@ $news = fetch_news('sport');
                     <?php if (isset($_SESSION['username'])): ?>
                         <?php if ($_SESSION['role'] === 'admin'): ?>
                             <li><a id="enterNewsLink" href="enter_news.php">Enter News</a></li>
+                            <li><a id="deleteNewsLink" href="delete_news.php">Delete News</a></li>
                         <?php endif; ?>
                         <li><a id="logoutLink" href="logout.php">Logout</a></li>
                     <?php else: ?>
@@ -61,9 +62,6 @@ $news = fetch_news('sport');
                                 <h3><?php echo htmlspecialchars($news_item['title']); ?></h3>
                                 <p><?php echo htmlspecialchars($news_item['summary']); ?></p>
                                 <a href="news.php?id=<?php echo $news_item['id']; ?>">Read More</a>
-                                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                                    <a href="php/delete_news.php?id=<?php echo $news_item['id']; ?>" class="delete-link">Delete</a>
-                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>

@@ -17,11 +17,18 @@ body {
     justify-content: center;
 }
 
+h2 {
+    margin: 10px auto 20px;
+    text-align: center;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     width: 75%;
+    margin: 0 auto;
+    max-width: 1200px;
 }
 
 header {
@@ -151,6 +158,7 @@ button:hover {
 
 .news-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     background-color: #fafafa;
     padding: 20px;
@@ -174,16 +182,16 @@ button:hover {
 
 .news-content h3 {
     margin-top: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .news-content p {
     margin-bottom: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .news-content a {
@@ -193,13 +201,6 @@ button:hover {
 
 .news-content a:hover {
     text-decoration: underline;
-}
-
-.news-content h3,
-.news-content p {
-    white-space: normal; 
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 .success-message {
@@ -253,8 +254,6 @@ article a:hover {
 .article-content {
     margin-top: 20px;
 }
-
-
 
 body.auth-body {
     background-color: #404040;
@@ -342,6 +341,25 @@ body.auth-body {
     display: block;
 }
 
+.inline-form {
+    display: inline;
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.delete-button:hover {
+    background-color: #ff1a1a;
+}
+
 .delete-link {
     color: red;
     text-decoration: none;
@@ -350,6 +368,19 @@ body.auth-body {
 
 .delete-link:hover {
     text-decoration: underline;
+}
+
+.news-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.news-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
 @media (max-width: 600px) {

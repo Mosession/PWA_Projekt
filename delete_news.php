@@ -1,8 +1,16 @@
 <?php
 session_start();
-require __DIR__ . '/php/fetch_news.php';
+require __DIR__ . '/config.php';
 
-$news = fetch_news('politics');
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
+    header("Location: index.php");
+    exit();
+}
+
+$stmt = $conn->prepare("SELECT id, title, summary FROM news");
+$stmt->execute();
+$result = $stmt->get_result();
+$news_items = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +20,6 @@ $news = fetch_news('politics');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Garlic</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -29,7 +36,7 @@ $news = fetch_news('politics');
                     <?php if (isset($_SESSION['username'])): ?>
                         <?php if ($_SESSION['role'] === 'admin'): ?>
                             <li><a id="enterNewsLink" href="enter_news.php">Enter News</a></li>
-                            <li><a id="deleteNewsLink" href="delete_news.php">Delete News</a></li>
+                            <li><a id="deleteNewsLink" href="delete_news.php" class="active">Delete News</a></li>
                         <?php endif; ?>
                         <li><a id="logoutLink" href="logout.php">Logout</a></li>
                     <?php else: ?>
@@ -38,40 +45,33 @@ $news = fetch_news('politics');
                 </ul>
             </nav>
         </header>
-        <?php if (isset($_SESSION['login_success'])): ?>
-            <div class="success-message">
-                <?php 
-                echo htmlspecialchars($_SESSION['login_success']); 
-                unset($_SESSION['login_success']);
-                ?>
-            </div>
-        <?php endif; ?>
-        <?php if (isset($_GET['delete_success'])): ?>
-            <div class="success-message">
-                News item deleted successfully.
-            </div>
-        <?php endif; ?>
         <main>
-            <div id="news-container">
-                <h2 id="news-header">Politics News</h2>
-                <section id="news">
-                    <?php foreach ($news as $news_item): ?>
-                        <div class="news-item">
-                            <img src="images/<?php echo htmlspecialchars($news_item['image']); ?>" alt="<?php echo htmlspecialchars($news_item['title']); ?>" class="news-image">
-                            <div class="news-content">
-                                <h3><?php echo htmlspecialchars($news_item['title']); ?></h3>
-                                <p><?php echo htmlspecialchars($news_item['summary']); ?></p>
-                                <a href="news.php?id=<?php echo $news_item['id']; ?>">Read More</a>
-                            </div>
+            <?php if (isset($_GET['delete_success'])): ?>
+                <div class="success-message">
+                    News item deleted successfully.
+                </div>
+            <?php endif; ?>
+            <div class="news-container">
+            <h2>Delete News</h2>
+                <?php foreach ($news_items as $news_item): ?>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <h3><?php echo htmlspecialchars($news_item['title']); ?></h3>
+                            <p><?php echo htmlspecialchars($news_item['summary']); ?></p>
+                        
+                        <br>
+                        <form action="php/delete_news.php" method="post" class="inline-form">
+                            <input type="hidden" name="news_id" value="<?php echo $news_item['id']; ?>">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
                         </div>
-                    <?php endforeach; ?>
-                </section>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </main>
         <footer>
             <p>Mauro Omeragić | JMBAG: 0246111562 | Tehničko veleučilište u Zagrebu | Programiranje web aplikacija</p>
         </footer>
     </div>
-    <script src="js/main.js"></script>
 </body>
 </html>

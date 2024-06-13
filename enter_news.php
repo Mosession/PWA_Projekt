@@ -11,7 +11,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enter News</title>
+    <title>The Garlic</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -29,7 +29,8 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
                     <li><a id="politicsLink" href="politics.php">Politics</a></li>
                     <?php if (isset($_SESSION['username'])): ?>
                         <?php if ($_SESSION['role'] === 'admin'): ?>
-                            <li><a id="enterNewsLink" href="enter_news.php" class="active">Enter News</a></li>
+                            <li><a id="enterNewsLink" href="enter_news.php">Enter News</a></li>
+                            <li><a id="deleteNewsLink" href="delete_news.php">Delete News</a></li>
                         <?php endif; ?>
                         <li><a id="logoutLink" href="logout.php">Logout</a></li>
                     <?php else: ?>
